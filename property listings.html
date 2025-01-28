@@ -1,156 +1,215 @@
 <!doctype html>
-<html lang="en"> 
- <head> 
-  <meta charset="UTF-8"> 
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
-  <title>Property Listings</title> 
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Modern Real Estate Website</title>
   <style>
     body {
+      margin: 0;
       font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      background-color: #000;
       color: #fff;
-    }
-    header {
-      background-color: #000;
-      padding: 20px;
-      text-align: center;
-    }
-    header h1 {
-      margin: 0;
-      color: #ffd700;
-    }
-    .filter-section {
-      padding: 20px;
-      background: url('https://i.postimg.cc/RhMtk4pM/b85748ba47b43721c5f72f58f5c6d23e.jpg') no-repeat center center;
+      background: url('https://i.postimg.cc/fWm43smJ/6fc736812272586d6d4c7f3e640edec2.jpg') no-repeat center center fixed;
       background-size: cover;
       position: relative;
-      color: #fff;
+      padding-top: 80px; /* Adjust the padding to ensure content is below the header */
     }
-    .filter-section::before {
+
+    /* Enhanced Black Overlay */
+    body::before {
       content: '';
-      position: absolute;
+      position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      background-color: rgba(0, 0, 0, 0.5); /* Black overlay with 50% opacity */
-      z-index: 1;
+      background-color: rgba(0, 0, 0, 0.85);
+      z-index: -1;
     }
-    .filter-form {
+
+    /* Header Section */
+    header {
       display: flex;
-      flex-direction: column;
+      justify-content: space-between;
       align-items: center;
-      gap: 15px;
-      position: relative;
-      z-index: 2;
-      max-width: 400px;
-      margin: 0 auto;
-    }
-    .filter-form label {
-      align-self: flex-start;
-      margin-bottom: 5px;
-      font-weight: bold;
-    }
-    .filter-form select,
-    .filter-form button {
+      padding: 15px 20px; /* Reduced padding for better space allocation */
+      background-color: rgba(0, 0, 0, 0.8);
+      position: fixed;
       width: 100%;
+      top: 0;
+      z-index: 1; /* Ensure the header stays on top */
+    }
+
+    /* Logo */
+    .logo {
+      background-color: white;
+      border-radius: 50%;
       padding: 10px;
-      border: 1px solid #ffd700;
-      background-color: #000;
-      color: #ffd700;
-      border-radius: 5px;
+      width: 60px; /* Adjust width to make the logo circular */
+      height: 60px; /* Adjust height to make the logo circular */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: transform 0.3s ease;
     }
-    .filter-form button {
-      background-color: #ffd700;
-      color: #000;
-      cursor: pointer;
+
+    .logo img {
+      width: 80%; /* Keep the image inside the circular logo */
+      height: auto;
+    }
+
+    .logo:hover {
+      transform: scale(1.1);
+    }
+
+    /* Navigation Links */
+    nav {
+      display: flex;
+      gap: 15px; /* Reduced gap for better space utilization */
+    }
+
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      font-size: 14px;  /* Reduced font size */
       font-weight: bold;
+      transition: color 0.3s ease;
+      padding: 5px 10px; /* Added padding for clickable area */
     }
-    .filter-form button:hover {
-      background-color: #ffc107;
+
+    nav a:hover {
+      color: #e6c200;
     }
-    .property-listings {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 20px;
+
+    /* Slideshow Section */
+    .slideshow {
+      position: relative;
+      width: 100%;
+      height: 500px;
+      overflow: hidden;
+    }
+
+    .slideshow img {
+      width: 100%;
+      height: 500px;
+      object-fit: cover;
+      position: absolute;
+      opacity: 0;
+      animation: slide 12s infinite;
+    }
+
+    .slideshow img:nth-child(1) {
+      animation-delay: 0s;
+    }
+
+    .slideshow img:nth-child(2) {
+      animation-delay: 4s;
+    }
+
+    .slideshow img:nth-child(3) {
+      animation-delay: 8s;
+    }
+
+    @keyframes slide {
+      0% { opacity: 1; }
+      33% { opacity: 1; }
+      50% { opacity: 0; }
+      100% { opacity: 0; }
+    }
+
+    /* Explore Button */
+    .explore-button {
+      display: block;
+      margin: 30px auto;
+      padding: 15px 30px;
+      font-size: 20px;
+      color: #000;
+      background-color: #FFD700;
+      border: none;
+      border-radius: 5px;
+      text-align: center;
+      text-decoration: none;
+      font-weight: bold;
+      cursor: pointer;
+      transition: transform 0.3s ease, background-color 0.3s ease;
+    }
+
+    .explore-button:hover {
+      transform: scale(1.1);
+      background-color: #e6c200;
+    }
+
+    /* Content Section */
+    .content-section {
+      padding: 50px 20px;
+      text-align: center;
+    }
+
+    .content-section h2 {
+      font-size: 28px;
+      color: #FFD700;
+      margin-bottom: 20px;
+    }
+
+    .content-section p {
+      font-size: 16px;
+      line-height: 1.8;
+      color: #ddd;
+    }
+
+    /* Footer Section */
+    footer {
+      background-color: rgba(0, 0, 0, 0.8);
       padding: 20px;
+      text-align: center;
     }
-    .property-card {
-      background-color: #000;
-      border: 1px solid #ffd700;
-      padding: 20px;
-      border-radius: 10px;
+
+    footer p {
+      margin: 0;
+      font-size: 14px;
       color: #fff;
     }
-    .property-card h3 {
-      margin: 0 0 10px;
-      color: #ffd700;
-    }
-    .property-card p {
-      margin: 5px 0;
-    }
-    footer {
-      text-align: center;
-      padding: 20px;
-      background-color: #000;
-      color: #ffd700;
-    }
-  </style> 
- </head> 
- <body> 
-  <header> 
-   <h1>Property Listings</h1> 
-  </header> 
-  <div class="filter-section"> 
-   <form class="filter-form"> 
-    <div> <label for="location">Location:</label> <select id="location"> <option value="all">All Locations</option> <option value="nairobi">Nairobi</option> <option value="mombasa">Mombasa</option> <option value="kisumu">Kisumu</option> <option value="eldoret">Eldoret</option> </select> 
-    </div> 
-    <div> <label for="propertyType">Property Type:</label> <select id="propertyType"> <option value="all">All Types</option> <option value="apartment">Apartment</option> <option value="bungalow">Bungalow</option> <option value="villa">Villa</option> <option value="commercial">Commercial</option> </select> 
-    </div> <button type="button" onclick="filterProperties()">Filter</button> 
-   </form> 
-  </div> 
-  <div class="property-listings" id="propertyListings"> <!-- Example Property Cards --> 
-   <div class="property-card"> 
-    <h3>Modern Apartment</h3> 
-    <p>Location: Nairobi</p> 
-    <p>Type: Apartment</p> 
-   </div> 
-   <div class="property-card"> 
-    <h3>Luxury Villa</h3> 
-    <p>Location: Mombasa</p> 
-    <p>Type: Villa</p> 
-   </div> 
-   <div class="property-card"> 
-    <h3>Cozy Bungalow</h3> 
-    <p>Location: Kisumu</p> 
-    <p>Type: Bungalow</p> 
-   </div> <!-- Add more properties dynamically here --> 
-  </div> 
-  <footer> 
-   <p>© 2025 Property Listings</p> 
-  </footer> 
-  <script>
-    function filterProperties() {
-      const location = document.getElementById('location').value.toLowerCase();
-      const type = document.getElementById('propertyType').value.toLowerCase();
+  </style>
+</head>
+<body>
+  <!-- Header Section -->
+  <header>
+    <div class="logo">
+      <img src="https://i.postimg.cc/KzbqvqXH/Milena-Homes-Logo.png" alt="Logo">
+    </div>
+    <nav>
+      <a href="property-listings.html">Properties</a>
+      <a href="mailto:info@goldenestates.com">Contact Us</a>
+      <a href="property-listings.html">Submit Property</a> <!-- Adjusted link -->
+    </nav>
+  </header>
 
-      const properties = document.querySelectorAll('.property-card');
-      properties.forEach(property => {
-        const propertyLocation = property.querySelector('p:nth-child(2)').innerText.split(': ')[1].toLowerCase();
-        const propertyType = property.querySelector('p:nth-child(3)').innerText.split(': ')[1].toLowerCase();
+  <!-- Slideshow Section -->
+  <div class="slideshow">
+    <img src="https://i.postimg.cc/8cz3pJRf/97c2c9f7321ef6f9079ef40c732682ec.jpg" alt="Luxury Property 1">
+    <img src="https://i.postimg.cc/3xzHtBgS/24199e4e9dd3ccbeaff2b8274029a78e.jpg" alt="Luxury Property 2">
+    <img src="https://i.postimg.cc/kgH7k9dy/38b88da3576cadcf9c124cdad36f4b77.jpg" alt="Luxury Property 3">
+  </div>
 
-        if (
-          (location === 'all' || propertyLocation === location) &&
-          (type === 'all' || propertyType === type)
-        ) {
-          property.style.display = '';
-        } else {
-          property.style.display = 'none';
-        }
-      });
-    }
-  </script> 
- 
-</body></html>
+  <!-- Explore Button -->
+  <a href="property-listings.html" class="explore-button">Explore Properties</a>
+
+  <!-- Mission Section -->
+  <section id="mission" class="content-section">
+    <h2>Our Mission</h2>
+    <p>Developing decent affordable Residential Homes and commercial Establishments for sustainable economic growth.</p>
+  </section>
+
+  <!-- Vision Section -->
+  <section id="vision" class="content-section">
+    <h2>Our Vision</h2>
+    <p>A Home for every Kenyan.</p>
+  </section>
+
+  <!-- Footer Section -->
+  <footer>
+    <p>Contact Us: <a href="mailto:info@goldenestates.com" style="color: #fff; text-decoration: none;">info@goldenestates.com</a> | +1 (234) 567-890</p>
+  </footer>
+
+</body>
+</html>
