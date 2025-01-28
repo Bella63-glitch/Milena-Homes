@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Modern Real Estate Website</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      color: #fff;
+      background: url('https://i.postimg.cc/fWm43smJ/6fc736812272586d6d4c7f3e640edec2.jpg') no-repeat center center fixed;
+      background-size: cover;
+      position: relative;
+      padding-top: 80px; /* Adjust the padding to ensure content is below the header */
+    }
+
+    /* Enhanced Black Overlay */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.85);
+      z-index: -1;
+    }
+
+    /* Header Section */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px;
+      background-color: rgba(0, 0, 0, 0.8);
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 1; /* Ensure the header stays on top */
+    }
+
+    /* Logo */
+    .logo {
+      background-color: white;
+      border-radius: 50%;
+      padding: 10px;
+      width: 50px;
+      height: 50px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: transform 0.3s ease;
+    }
+
+    .logo img {
+      width: 80%;
+      height: auto;
+    }
+
+    .logo:hover {
+      transform: scale(1.1);
+    }
+
+    /* Navigation Links */
+    nav {
+      display: flex;
+      gap: 20px;
+    }
+
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      font-size: 18px;
+      font-weight: bold;
+      transition: color 0.3s ease;
+    }
+
+    nav a:hover {
+      color: #e6c200;
+    }
+
+    /* Slideshow Section */
+    .slideshow {
+      position: relative;
+      width: 100%;
+      height: 500px;
+      overflow: hidden;
+    }
+
+    .slideshow img {
+      width: 100%;
+      height: 500px;
+      object-fit: cover;
+      position: absolute;
+      opacity: 0;
+      animation: slide 12s infinite;
+    }
+
+    .slideshow img:nth-child(1) {
+      animation-delay: 0s;
+    }
+
+    .slideshow img:nth-child(2) {
+      animation-delay: 4s;
+    }
+
+    .slideshow img:nth-child(3) {
+      animation-delay: 8s;
+    }
+
+    @keyframes slide {
+      0% { opacity: 1; }
+      33% { opacity: 1; }
+      50% { opacity: 0; }
+      100% { opacity: 0; }
+    }
+
+    /* Explore Button */
+    .explore-button {
+      display: block;
+      margin: 30px auto;
+      padding: 15px 30px;
+      font-size: 20px;
+      color: #000;
+      background-color: #FFD700;
+      border: none;
+      border-radius: 5px;
+      text-align: center;
+      text-decoration: none;
+      font-weight: bold;
+      cursor: pointer;
+      transition: transform 0.3s ease, background-color 0.3s ease;
+    }
+
+    .explore-button:hover {
+      transform: scale(1.1);
+      background-color: #e6c200;
+    }
+
+    /* Content Section */
+    .content-section {
+      padding: 50px 20px;
+      text-align: center;
+    }
+
+    .content-section h2 {
+      font-size: 28px;
+      color: #FFD700;
+      margin-bottom: 20px;
+    }
+
+    .content-section p {
+      font-size: 16px;
+      line-height: 1.8;
+      color: #ddd;
+    }
+
+    /* Footer Section */
+    footer {
+      background-color: rgba(0, 0, 0, 0.8);
+      padding: 20px;
+      text-align: center;
+    }
+
+    footer p {
+      margin: 0;
+      font-size: 14px;
+      color: #fff;
+    }
+  </style>
+</head>
+<body>
+  <!-- Header Section -->
+  <header>
+    <div class="logo">
+      <img src="https://i.postimg.cc/KzbqvqXH/Milena-Homes-Logo.png" alt="Logo">
+    </div>
+    <nav>
+      <a href="#submit">Submit Properties</a>
+      <a href="mailto:info@goldenestates.com">Contact Us</a>
+    </nav>
+  </header>
+
+  <!-- Slideshow Section -->
+  <div class="slideshow">
+    <img src="https://i.postimg.cc/8cz3pJRf/97c2c9f7321ef6f9079ef40c732682ec.jpg" alt="Luxury Property 1">
+    <img src="https://i.postimg.cc/3xzHtBgS/24199e4e9dd3ccbeaff2b8274029a78e.jpg" alt="Luxury Property 2">
+    <img src="https://i.postimg.cc/kgH7k9dy/38b88da3576cadcf9c124cdad36f4b77.jpg" alt="Luxury Property 3">
+  </div>
+
+  <!-- Explore Button -->
+  <a href="#properties" class="explore-button">Explore Properties</a>
+
+  <!-- Mission Section -->
+  <section id="mission" class="content-section">
+    <h2>Our Mission</h2>
+    <p>To provide exceptional real estate solutions that inspire trust, satisfaction, and excellence for every client.</p>
+  </section>
+
+  <!-- Vision Section -->
+  <section id="vision" class="content-section">
+    <h2>Our Vision</h2>
+    <p>To be a global leader in the real estate industry by redefining modern living with integrity, innovation, and luxury.</p>
+  </section>
+
+  <!-- Footer Section -->
+  <footer>
+    <p>Contact Us: <a href="mailto:info@goldenestates.com" style="color: #fff; text-decoration: none;">info@goldenestates.com</a> | +1 (234) 567-890</p>
+  </footer>
+
+</body></html>
