@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en"> 
+ <head> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <title>Property Details</title> 
+  <style>
+        body {
+            font-family: sans-serif;
+            background-color: #1a1a1a;
+            color: #fff;
+        }
+
+        .container {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .property-details {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .image-container {
+            flex: 0 0 50%;
+            max-width: 50%;
+        }
+
+        .image-container img {
+            width: 100%;
+            height: auto;
+            border-radius: 5px;
+        }
+
+        .details-container {
+            flex: 0 0 50%;
+            max-width: 50%;
+        }
+
+        .details-container h1 {
+            color: gold;
+            margin-bottom: 10px;
+        }
+
+        .details-container p {
+            margin-bottom: 15px;
+        }
+
+        .details-container ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .details-container li {
+            margin-bottom: 5px;
+        }
+
+        .amenities {
+            margin-top: 20px;
+        }
+
+        .amenities h2 {
+            color: gold;
+            margin-bottom: 10px;
+        }
+
+        .amenities ul {
+            list-style-type: disc;
+            padding-left: 20px;
+        }
+
+        .contact {
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        .contact button {
+            background-color: gold;
+            color: #1a1a1a;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        @media screen and (max-width: 768px) {
+            .property-details {
+                flex-direction: column;
+            }
+        }
+    </style> 
+ </head> 
+ <body> 
+  <div class="container"> 
+   <div class="property-details"> 
+    <div class="image-container"> 
+     <img src="property-image.jpg" alt="Property Image"> 
+    </div> 
+    <div class="details-container"> 
+     <h1>Luxury Villa in the Heart of the City</h1> 
+     <p>This stunning villa offers a luxurious lifestyle with spacious interiors, a private garden, and a swimming pool.</p> 
+     <ul> 
+      <li><strong>Bedrooms:</strong> 4</li> 
+      <li><strong>Bathrooms:</strong> 5</li> 
+      <li><strong>Size:</strong> 5000 sq ft</li> 
+      <li><strong>Price:</strong> $5,000,000</li> 
+     </ul> 
+    </div> 
+   </div> 
+   <div class="amenities"> 
+    <h2>Amenities</h2> 
+    <ul> 
+     <li>Private Swimming Pool</li> 
+     <li>Home Theater</li> 
+     <li>Gourmet Kitchen</li> 
+     <li>Home Office</li> 
+     <li>Fitness Center</li> 
+     <li>24/7 Security</li> 
+    </ul> 
+   </div> 
+   <div class="contact"> <button>Contact Agent</button> 
+   </div> 
+  </div> 
+ 
+</body></html>
