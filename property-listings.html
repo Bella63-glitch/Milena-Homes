@@ -1,10 +1,10 @@
 <!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Property Listings</title>
-    <style>
+<html lang="en"> 
+ <head> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <title>Property Listings</title> 
+  <style>
       body {
         font-family: Arial, sans-serif;
         margin: 0;
@@ -53,7 +53,7 @@
         margin-bottom: 5px;
         font-weight: bold;
       }
-      .filter-form select,
+      .filter-form input,
       .filter-form button {
         width: 100%;
         padding: 10px;
@@ -61,6 +61,10 @@
         background-color: #000;
         color: #ffd700;
         border-radius: 5px;
+      }
+      .filter-form input::placeholder {
+        color: #ffd700;
+        opacity: 0.8;
       }
       .filter-form button {
         background-color: #ffd700;
@@ -103,82 +107,107 @@
         background-color: #000;
         color: #ffd700;
       }
-    </style>
-  </head>
-  <body>
-    <header>
-      <h1>Property Listings</h1>
-    </header>
-    <div class="filter-section">
-      <form class="filter-form">
-        <div>
-          <label for="location">Location:</label>
-          <select id="location">
-            <option value="all">All Locations</option>
-            <option value="nairobi">Nairobi</option>
-            <option value="mombasa">Mombasa</option>
-            <option value="kisumu">Kisumu</option>
-            <option value="eldoret">Eldoret</option>
-          </select>
-        </div>
-        <div>
-          <label for="propertyType">Property Type:</label>
-          <select id="propertyType">
-            <option value="all">All Types</option>
-            <option value="apartment">Apartment</option>
-            <option value="bungalow">Bungalow</option>
-            <option value="villa">Villa</option>
-            <option value="commercial">Commercial</option>
-          </select>
-        </div>
-        <button type="button" onclick="filterProperties()">Filter</button>
-      </form>
-    </div>
-    <div class="property-listings" id="propertyListings">
-      <!-- Example Property Cards -->
-      <div class="property-card">
-        <img src="https://i.postimg.cc/1zpkLHLc/ddfdc50340741968e19772636c8a0ce0.jpg" alt="Modern Apartment">
-        <h3>Modern Apartment</h3>
-        <p>Location: Nairobi</p>
-        <p>Type: Apartment</p>
-      </div>
-      <div class="property-card">
-        <img src="https://i.postimg.cc/1zpkLHLc/ddfdc50340741968e19772636c8a0ce0.jpg" alt="Luxury Villa">
-        <h3>Luxury Villa</h3>
-        <p>Location: Mombasa</p>
-        <p>Type: Villa</p>
-      </div>
-      <div class="property-card">
-        <img src="https://i.postimg.cc/1zpkLHLc/ddfdc50340741968e19772636c8a0ce0.jpg" alt="Cozy Bungalow">
-        <h3>Cozy Bungalow</h3>
-        <p>Location: Kisumu</p>
-        <p>Type: Bungalow</p>
-      </div>
-      <!-- Add more properties dynamically here -->
-    </div>
-    <footer>
-      <p>© 2025 Property Listings</p>
-    </footer>
-    <script>
+    </style> 
+ </head> 
+ <body> 
+  <header> 
+   <h1>Property Listings</h1> 
+  </header> 
+  <div class="filter-section"> 
+   <form class="filter-form"> 
+    <div> <label for="location">Location:</label> 
+     <input type="text" id="location" placeholder="e.g., Nairobi"> 
+    </div> 
+    <div> <label for="propertyType">Property Type:</label> 
+     <input type="text" id="propertyType" placeholder="e.g., Apartment"> 
+    </div> <button type="button" onclick="filterProperties()">Filter</button> 
+   </form> 
+  </div> 
+  <div class="property-listings" id="propertyListings"> <!-- Property cards will be inserted here dynamically --> 
+  </div> 
+  <footer> 
+   <p>© 2025 Property Listings</p> 
+  </footer> 
+  <script>
+      // Backendless credentials and settings
+      const APP_ID = '9F28C534-8DE5-4505-8E67-3D4C16FFDD63';
+      const REST_API_KEY = '074FA8E4-7EA4-4EF3-83F8-74A692AE38ED';
+      const BASE_URL = `https://api.backendless.com/${APP_ID}/${REST_API_KEY}/data/Properties`;
+
+      // Fetch properties from Backendless and render property cards
+      async function loadProperties() {
+        try {
+          const res = await fetch(BASE_URL);
+          const data = await res.json();
+          const properties = Array.isArray(data) ? data : (data.data || []);
+          const listingsEl = document.getElementById('propertyListings');
+          listingsEl.innerHTML = '';
+          properties.forEach(property => {
+            // If property.imageurls is stored as JSON text, parse it.
+            let images = property.imageurls;
+            if (typeof images === 'string') {
+              try {
+                images = JSON.parse(images);
+              } catch (e) {
+                images = [];
+              }
+            }
+            const imageUrl = images && images.length ? images[0] : 'https://via.placeholder.com/300x200?text=No+Image';
+            // Create a property card with data attributes for filtering.
+            const card = document.createElement('div');
+            card.className = 'property-card';
+            // Use lower-case values for filtering comparison
+            card.setAttribute('data-location', property.location ? property.location.toLowerCase() : '');
+            card.setAttribute('data-type', property.category ? property.category.toLowerCase() : '');
+            card.innerHTML = `
+              <img src="${imageUrl}" alt="${property.title || 'Property'}">
+              <h3>${property.title || 'Untitled Property'}</h3>
+              <p><strong>Location:</strong> ${property.location || 'N/A'}</p>
+              <p><strong>Type:</strong> ${property.category || 'N/A'}</p>
+              ${property.price ? `<p><strong>Price:</strong> Ksh ${property.price}</p>` : ''}
+            `;
+            listingsEl.appendChild(card);
+          });
+        } catch (error) {
+          console.error('Error fetching properties:', error);
+        }
+      }
+
+      // Filter properties based on the input values for location and type
       function filterProperties() {
-        const location = document.getElementById('location').value.toLowerCase();
-        const type = document.getElementById('propertyType').value.toLowerCase();
-
+        const locationInput = document.getElementById('location').value.trim().toLowerCase();
+        const typeInput = document.getElementById('propertyType').value.trim().toLowerCase();
         const properties = document.querySelectorAll('.property-card');
-        properties.forEach(property => {
-          const propertyLocation = property.querySelector('p:nth-child(3)').innerText.split(': ')[1].toLowerCase();
-          const propertyType = property.querySelector('p:nth-child(4)').innerText.split(': ')[1].toLowerCase();
 
-          if (
-            (location === 'all' || propertyLocation === location) &&
-            (type === 'all' || propertyType === type)
-          ) {
+        properties.forEach(property => {
+          const propertyLocation = property.getAttribute('data-location');
+          const propertyType = property.getAttribute('data-type');
+          
+          const matchLocation = !locationInput || propertyLocation.includes(locationInput);
+          const matchType = !typeInput || propertyType.includes(typeInput);
+
+          if (matchLocation && matchType) {
             property.style.display = '';
           } else {
             property.style.display = 'none';
           }
         });
       }
-    </script>
-  </body>
+
+      // Load properties on page load
+      document.addEventListener('DOMContentLoaded', loadProperties);
+    </script> 
+ </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
