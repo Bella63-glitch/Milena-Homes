@@ -101,6 +101,11 @@
         border-radius: 10px;
         margin-bottom: 10px;
       }
+      .property-card a {
+        color: inherit;
+        text-decoration: none;
+        display: block;
+      }
       footer {
         text-align: center;
         padding: 20px;
@@ -115,15 +120,19 @@
   </header> 
   <div class="filter-section"> 
    <form class="filter-form"> 
-    <div> <label for="location">Location:</label> 
-     <input type="text" id="location" placeholder="e.g., Nairobi"> 
+    <div> 
+      <label for="location">Location:</label> 
+      <input type="text" id="location" placeholder="e.g., Nairobi"> 
     </div> 
-    <div> <label for="propertyType">Property Type:</label> 
-     <input type="text" id="propertyType" placeholder="e.g., Apartment"> 
-    </div> <button type="button" onclick="filterProperties()">Filter</button> 
+    <div> 
+      <label for="propertyType">Property Type:</label> 
+      <input type="text" id="propertyType" placeholder="e.g., Apartment"> 
+    </div> 
+    <button type="button" onclick="filterProperties()">Filter</button> 
    </form> 
   </div> 
-  <div class="property-listings" id="propertyListings"> <!-- Property cards will be inserted here dynamically --> 
+  <div class="property-listings" id="propertyListings"> 
+    <!-- Property cards will be inserted here dynamically --> 
   </div> 
   <footer> 
    <p>© 2025 Property Listings</p> 
@@ -153,19 +162,26 @@
               }
             }
             const imageUrl = images && images.length ? images[0] : 'https://via.placeholder.com/300x200?text=No+Image';
-            // Create a property card with data attributes for filtering.
+            // Create a property card and wrap it with an anchor tag for detailed view.
             const card = document.createElement('div');
             card.className = 'property-card';
-            // Use lower-case values for filtering comparison
             card.setAttribute('data-location', property.location ? property.location.toLowerCase() : '');
             card.setAttribute('data-type', property.category ? property.category.toLowerCase() : '');
-            card.innerHTML = `
+            
+            // Create the anchor element with the property details page URL
+            const link = document.createElement('a');
+            // Assuming the property detail page is property-detail.html and using objectId as the query parameter
+            link.href = `property-detail.html?id=${property.objectId || ''}`;
+            
+            link.innerHTML = `
               <img src="${imageUrl}" alt="${property.title || 'Property'}">
               <h3>${property.title || 'Untitled Property'}</h3>
               <p><strong>Location:</strong> ${property.location || 'N/A'}</p>
               <p><strong>Type:</strong> ${property.category || 'N/A'}</p>
               ${property.price ? `<p><strong>Price:</strong> Ksh ${property.price}</p>` : ''}
             `;
+            
+            card.appendChild(link);
             listingsEl.appendChild(card);
           });
         } catch (error) {
@@ -199,7 +215,6 @@
     </script> 
  </body>
 </html>
-
 
 
 
