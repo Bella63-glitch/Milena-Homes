@@ -2,389 +2,361 @@
 <html lang="en"> 
  <head> 
   <meta charset="UTF-8"> 
-  <title>Real Estate Admin Dashboard</title> 
-  <meta name="viewport" content="width=device-width, initial-scale=1"> <!-- Bootstrap CSS --> 
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"> <!-- Google Fonts --> 
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&amp;display=swap" rel="stylesheet"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <title>Modern Real Estate Website</title> 
   <style>
-    body {
-      font-family: 'Roboto', sans-serif;
-      overflow-x: hidden;
-      background-color: #000;
-      color: #FFD700;
+    /* Global Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
     }
-    /* Sidebar Styles */
-    #sidebar {
-      min-width: 250px;
-      max-width: 250px;
-      background: #000;
-      border-right: 1px solid #FFD700;
-      height: 100vh;
+
+    /* Page Fade‑In */
+    body {
+      font-family: Arial, sans-serif;
+      color: #fff;
+      background: url('https://i.postimg.cc/fWm43smJ/6fc736812272586d6d4c7f3e640edec2.jpg') no-repeat center center fixed;
+      background-size: cover;
+      position: relative;
+      padding-top: 80px;
+      animation: fadeInPage 1s ease-out;
+    }
+
+    @keyframes fadeInPage {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+
+    body::before {
+      content: '';
       position: fixed;
       top: 0;
       left: 0;
-      overflow-y: auto;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.85);
+      z-index: -1;
     }
-    #sidebar h4 {
-      color: #FFD700;
-      margin: 0;
-      padding: 20px;
-      text-align: center;
-      background: #111;
-      border-bottom: 1px solid #FFD700;
-    }
-    #sidebar .nav-link {
-      color: #FFD700;
+
+    /* Header */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
       padding: 15px 20px;
-      border-bottom: 1px solid #222;
-      transition: background 0.3s;
-      cursor: pointer;
+      background-color: rgba(0, 0, 0, 0.8);
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 1000;
     }
-    #sidebar .nav-link:hover, #sidebar .nav-link.active {
-      background: #FFD700;
-      color: #000;
+
+    /* Smaller, Perfectly Circular Logo */
+    .logo-container {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #fff;
+      transition: transform 0.3s ease;
+      animation: pulse 2s infinite alternate;
     }
-    /* Content Area */
-    #content {
-      margin-left: 250px;
-      padding: 20px;
+
+    @keyframes pulse {
+      0% {
+        transform: scale(1);
+        opacity: 0.8;
+      }
+      100% {
+        transform: scale(1.1);
+        opacity: 1;
+      }
     }
-    /* Navbar */
-    .navbar {
-      background-color: #111;
-      border-bottom: 1px solid #FFD700;
+
+    .logo {
+      width: 50px;
+      height: 50px;
+      object-fit: contain;
     }
-    .navbar .navbar-brand,
-    .navbar-nav .nav-link {
-      color: #FFD700 !important;
+
+    .logo-container:hover {
+      transform: scale(1.1);
     }
-    /* Cards and Table */
-    .card {
-      background-color: #111;
-      border: 1px solid #FFD700;
+
+    nav {
+      display: flex;
+      gap: 20px;
+    }
+
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      font-size: 16px;
+      font-weight: bold;
+      padding: 10px 15px;
+      transition: color 0.3s ease;
+    }
+
+    nav a:hover {
+      color: #e6c200;
+    }
+
+    /* Hero Section */
+    .hero {
+      position: relative;
+      width: 100%;
+      height: 600px;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      background: url('https://i.postimg.cc/8cz3pJRf/97c2c9f7321ef6f9079ef40c732682ec.jpg') no-repeat center center;
+      background-size: cover;
+    }
+
+    .hero-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      z-index: 1;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      animation: fadeInUp 1s ease-out;
+    }
+
+    @keyframes fadeInUp {
+      0% {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .hero h1 {
+      font-size: 48px;
+      font-weight: bold;
       margin-bottom: 20px;
-    }
-    .card-header {
-      background-color: #000;
       color: #FFD700;
-      border-bottom: 1px solid #FFD700;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
     }
-    .card-body {
-      background-color: #111;
-      color: #FFD700;
+
+    .hero p {
+      font-size: 20px;
+      color: #eee;
+      margin-bottom: 30px;
+      max-width: 800px;
+      line-height: 1.6;
     }
-    .table {
-      background-color: #111;
-      color: #FFD700;
-    }
-    .table-striped tbody tr:nth-of-type(odd) {
-      background-color: #222;
-    }
-    /* Form Controls */
-    input, textarea, select {
-      background-color: #222;
-      color: #FFD700;
-      border: 1px solid #FFD700;
-    }
-    input:focus, textarea:focus, select:focus {
-      box-shadow: none;
-      border-color: #FFD700;
-    }
-    button {
-      border: 1px solid #FFD700;
-      transition: background 0.3s, color 0.3s;
-    }
-    button:hover {
-      background: #FFD700;
+
+    .hero .explore-button {
+      display: inline-block;
+      padding: 15px 35px;
+      font-size: 20px;
       color: #000;
+      background-color: #FFD700;
+      border: none;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: bold;
+      cursor: pointer;
+      transition: transform 0.3s ease, background-color 0.3s ease;
+      animation: pulseButton 1.5s infinite alternate;
     }
-    /* Image Preview */
-    #imagePreview img {
-      max-width: 100px;
-      margin: 5px;
-      border: 1px solid #FFD700;
-      border-radius: 4px;
+
+    @keyframes pulseButton {
+      0% {
+        transform: scale(1);
+      }
+      100% {
+        transform: scale(1.05);
+      }
     }
-    /* Responsive adjustments */
-    @media (max-width: 768px) {
-      #sidebar {
-        position: relative;
-        width: 100%;
-        height: auto;
+
+    .hero .explore-button:hover {
+      transform: scale(1.1);
+      background-color: #e6c200;
+    }
+
+    /* Content Sections */
+    .content-section {
+      padding: 60px 20px;
+      text-align: center;
+    }
+
+    .content-section h2 {
+      font-size: 32px;
+      color: #FFD700;
+      margin-bottom: 25px;
+      text-transform: uppercase;
+      animation: slideInLeft 1s ease-out forwards;
+      opacity: 0;
+    }
+
+    @keyframes slideInLeft {
+      0% {
+        opacity: 0;
+        transform: translateX(-50px);
       }
-      #content {
-        margin-left: 0;
+      100% {
+        opacity: 1;
+        transform: translateX(0);
       }
+    }
+
+    .content-section p {
+      font-size: 18px;
+      line-height: 1.8;
+      color: #ddd;
+      max-width: 900px;
+      margin: 0 auto 30px;
+      animation: fadeIn 1s ease-out forwards;
+      opacity: 0;
+      animation-delay: 0.3s;
+    }
+
+    @keyframes fadeIn {
+      0% { opacity: 0; }
+      100% { opacity: 1; }
+    }
+
+    /* Testimonials */
+    @keyframes slideInRight {
+      0% {
+        opacity: 0;
+        transform: translateX(50px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    .testimonials-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 30px;
+      justify-content: center;
+      margin-top: 40px;
+    }
+
+    .testimonial {
+      background-color: rgba(255, 255, 255, 0.1);
+      padding: 25px;
+      border-radius: 8px;
+      opacity: 0;
+      animation: slideInRight 0.8s ease-out forwards;
+    }
+
+    .testimonial:nth-child(1) { animation-delay: 0.5s; }
+    .testimonial:nth-child(2) { animation-delay: 0.7s; }
+    .testimonial:nth-child(3) { animation-delay: 0.9s; }
+
+    .testimonial p {
+      font-style: italic;
+      color: #ddd;
+      font-size: 16px;
+      line-height: 1.6;
+      margin-bottom: 15px;
+    }
+
+    .testimonial h4 {
+      margin-top: 15px;
+      color: #FFD700;
+      font-size: 18px;
+      text-align: right;
+    }
+
+    /* Footer */
+    footer {
+      background-color: rgba(0, 0, 0, 0.8);
+      padding: 30px 20px;
+      text-align: center;
+    }
+
+    footer p {
+      font-size: 16px;
+      color: #fff;
+      margin-bottom: 10px;
+    }
+
+    footer a {
+      color: #fff;
+      text-decoration: underline;
     }
   </style> 
  </head> 
  <body> 
-  <div id="sidebar"> 
-   <h4>Admin Panel</h4> 
-   <nav class="nav flex-column"> <a class="nav-link active" data-bs-toggle="pill" href="#dashboard">Dashboard</a> <a class="nav-link" data-bs-toggle="pill" href="#properties">Properties</a> 
-   </nav> 
-  </div> 
-  <div id="content"> 
-   <nav class="navbar navbar-expand-lg"> 
-    <div class="container-fluid"> <span class="navbar-brand mb-0 h1">Real Estate Admin</span> 
-     <ul class="navbar-nav ms-auto"> 
-      <li class="nav-item"><a class="nav-link" href="#">Home</a></li> 
-      <li class="nav-item"><a class="nav-link" href="#">Profile</a></li> 
-      <li class="nav-item"><a class="nav-link" href="#">Logout</a></li> 
-     </ul> 
-    </div> 
-   </nav> 
-   <div class="tab-content mt-4"> <!-- Dashboard Section --> 
-    <div class="tab-pane fade show active" id="dashboard"> 
-     <div class="container"> 
-      <h2 class="mb-4">Dashboard</h2> 
-      <p>Welcome to your Real Estate Admin Dashboard.</p> 
-     </div> 
-    </div> <!-- Properties Section --> 
-    <div class="tab-pane fade" id="properties"> 
-     <div class="container"> 
-      <h2 class="mb-4">Properties</h2> <!-- Properties List --> 
-      <div class="card"> 
-       <div class="card-header">
-        Properties List
-       </div> 
-       <div class="card-body"> 
-        <div class="table-responsive"> 
-         <table class="table table-striped" id="propertiesTable"> 
-          <thead> 
-           <tr> 
-            <th>Category</th> 
-            <th>Description</th> 
-            <th>Images</th> 
-            <th>Location</th> 
-            <th>Title</th> 
-            <th>Price</th> 
-            <th>Actions</th> 
-           </tr> 
-          </thead> 
-          <tbody></tbody> 
-         </table> 
-        </div> 
-       </div> 
-      </div> <!-- Add / Edit Property Form --> 
-      <div class="card"> 
-       <div class="card-header">
-        Add / Edit Property
-       </div> 
-       <div class="card-body"> 
-        <form id="propertyForm"> 
-         <div class="mb-3"> <label class="form-label">Category</label> 
-          <input type="text" id="propertyCategory" class="form-control" required> 
-         </div> 
-         <div class="mb-3"> <label class="form-label">Description</label> <textarea id="propertyDescription" class="form-control" rows="3" required></textarea> 
-         </div> 
-         <div class="mb-3"> <label class="form-label">Upload Images (max 20)</label> 
-          <input type="file" id="propertyImages" class="form-control" accept="image/*" multiple> 
-          <div id="imagePreview" class="d-flex flex-wrap mt-2"></div> 
-         </div> 
-         <div class="mb-3"> <label class="form-label">Location</label> 
-          <input type="text" id="propertyLocation" class="form-control" required> 
-         </div> 
-         <div class="mb-3"> <label class="form-label">Title</label> 
-          <input type="text" id="propertyTitle" class="form-control" required> 
-         </div> 
-         <div class="mb-3"> <label class="form-label">Price</label> 
-          <input type="number" id="propertyPrice" class="form-control" required> 
-         </div> 
-         <div class="d-flex"> <button type="submit" id="submitBtn" class="btn btn-success">Add Property</button> <button type="button" id="cancelEditBtn" class="btn btn-secondary ms-2" style="display:none;">Cancel</button> 
-         </div> 
-        </form> 
-       </div> 
-      </div> 
-     </div> 
-    </div><!-- End Properties Section --> 
+  <header> 
+   <div class="logo-container"> 
+    <img class="logo" src="https://i.postimg.cc/KzbqvqXH/Milena-Homes-Logo.png" alt="Milena Homes Logo"> 
    </div> 
-  </div> <!-- Bootstrap JS bundle --> 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script> 
-  <script>
-    // Updated credentials
-    const APP_ID       = '9F28C534-8DE5-4505-8E67-3D4C16FFDD63';
-    const REST_API_KEY = '074FA8E4-7EA4-4EF3-83F8-74A692AE38ED';
-    const BASE_URL     = `https://api.backendless.com/${APP_ID}/${REST_API_KEY}/data/Properties`;
-    const FILE_FOLDER  = 'propertiesimages';
-
-    let currentEditId    = null;
-    let editingImageUrls = [];
-
-    // Preview selected images
-    document.getElementById('propertyImages').addEventListener('change', function() {
-      const preview = document.getElementById('imagePreview');
-      preview.innerHTML = '';
-      const files = Array.from(this.files).slice(0, 20);
-      files.forEach(file => {
-        const reader = new FileReader();
-        reader.onload = e => {
-          const img = document.createElement('img');
-          img.src = e.target.result;
-          preview.appendChild(img);
-        };
-        reader.readAsDataURL(file);
-      });
-      if (this.files.length > 20) {
-        alert('You can upload up to 20 images only. Extra files have been ignored.');
-      }
-    });
-
-    // Fetch properties from Backendless
-    async function fetchProperties() {
-      try {
-        const res  = await fetch(BASE_URL);
-        const json = await res.json();
-        const list = Array.isArray(json) ? json : (json.data || []);
-        const tbody = document.querySelector('#propertiesTable tbody');
-        tbody.innerHTML = '';
-        list.forEach(p => {
-          const tr = document.createElement('tr');
-          // Build image links for each property
-          const imgs = (p.imageurls || []).map(url =>
-            `<a href="${url}" target="_blank" class="d-block">View</a>`
-          ).join('');
-          tr.innerHTML = `
-            <td>${p.category || ''}</td>
-            <td>${p.description || ''}</td>
-            <td>${imgs}</td>
-            <td>${p.location || ''}</td>
-            <td>${p.title || ''}</td>
-            <td>${p.price ? '$' + p.price : ''}</td>
-            <td>
-              <button class="btn btn-sm btn-primary me-1" onclick="startEdit('${p.objectId}')">Edit</button>
-              <button class="btn btn-sm btn-danger" onclick="deleteProperty('${p.objectId}')">Delete</button>
-            </td>
-          `;
-          tbody.appendChild(tr);
-        });
-      } catch (e) {
-        console.error('Fetch error:', e);
-        alert('Error fetching properties: ' + e.message);
-      }
-    }
-
-    // Delete property
-    async function deleteProperty(id) {
-      if (!confirm('Delete this property?')) return;
-      try {
-        const res = await fetch(`${BASE_URL}/${id}`, { method: 'DELETE' });
-        if (!res.ok) throw new Error(await res.text());
-        alert('Property deleted.');
-        if (currentEditId === id) resetForm();
-        fetchProperties();
-      } catch (err) {
-        console.error('Delete error:', err);
-        alert('Delete failed: ' + err.message);
-      }
-    }
-
-    // Start editing a property
-    async function startEdit(id) {
-      try {
-        const res  = await fetch(`${BASE_URL}/${id}`);
-        if (!res.ok) throw new Error(await res.text());
-        const data = await res.json();
-        document.getElementById('propertyCategory').value    = data.category;
-        document.getElementById('propertyDescription').value = data.description;
-        document.getElementById('propertyLocation').value    = data.location;
-        document.getElementById('propertyTitle').value       = data.title;
-        document.getElementById('propertyPrice').value       = data.price;
-        editingImageUrls = data.imageurls || [];
-        // Preview existing images
-        const preview = document.getElementById('imagePreview');
-        preview.innerHTML = '';
-        editingImageUrls.forEach(url => {
-          const img = document.createElement('img');
-          img.src = url;
-          preview.appendChild(img);
-        });
-        currentEditId = id;
-        document.getElementById('submitBtn').textContent = 'Update Property';
-        document.getElementById('cancelEditBtn').style.display = 'inline-block';
-        document.querySelector('a[href="#properties"]').click();
-      } catch (err) {
-        console.error('Edit load error:', err);
-        alert('Could not load property: ' + err.message);
-      }
-    }
-
-    // Reset form
-    function resetForm() {
-      currentEditId = null;
-      editingImageUrls = [];
-      document.getElementById('propertyForm').reset();
-      document.getElementById('imagePreview').innerHTML = '';
-      document.getElementById('submitBtn').textContent = 'Add Property';
-      document.getElementById('cancelEditBtn').style.display = 'none';
-    }
-
-    // Handle form submit (Add / Edit)
-    document.getElementById('propertyForm').addEventListener('submit', async function(e) {
-      e.preventDefault();
-      const cat   = document.getElementById('propertyCategory').value.trim();
-      const desc  = document.getElementById('propertyDescription').value.trim();
-      const loc   = document.getElementById('propertyLocation').value.trim();
-      const tit   = document.getElementById('propertyTitle').value.trim();
-      const pri   = parseFloat(document.getElementById('propertyPrice').value);
-      const files = Array.from(document.getElementById('propertyImages').files).slice(0, 20);
-
-      try {
-        // Upload new files (if any)
-        const newUrls = await Promise.all(files.map(async file => {
-          const fileName  = Date.now() + '_' + file.name;
-          const uploadUrl = `https://api.backendless.com/${APP_ID}/${REST_API_KEY}/files/${FILE_FOLDER}/${fileName}`;
-          const fd = new FormData();
-          fd.append('file', file);
-          const upRes = await fetch(uploadUrl, { method: 'POST', body: fd });
-          if (!upRes.ok) throw new Error(await upRes.text());
-          const upData = await upRes.json();
-          return upData.fileURL;
-        }));
-
-        // Combine with existing images (for edits)
-        const allUrls = currentEditId
-          ? [...editingImageUrls, ...newUrls].slice(0, 20)
-          : newUrls;
-
-        const payload = {
-          category:    cat,
-          description: desc,
-          imageurls:   allUrls,
-          location:    loc,
-          title:       tit,
-          price:       pri
-        };
-
-        let res;
-        if (currentEditId) {
-          res = await fetch(`${BASE_URL}/${currentEditId}`, {
-            method: 'PUT',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(payload)
-          });
-        } else {
-          res = await fetch(BASE_URL, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(payload)
-          });
-        }
-
-        if (!res.ok) throw new Error(await res.text());
-        alert(currentEditId ? 'Property updated!' : 'Property added!');
-        resetForm();
-        fetchProperties();
-      } catch (err) {
-        console.error('Save error:', err);
-        alert('Save failed: ' + err.message);
-      }
-    });
-
-    document.addEventListener('DOMContentLoaded', fetchProperties);
-  </script> 
+   <nav> <a href="property-listings.html">Properties</a> <a href="mailto:chairman.milenahomes@gmail.com">Contact Us</a> <a href="submit.html">Submit Property</a> 
+   </nav> 
+  </header> 
+  <div class="hero"> 
+   <div class="hero-overlay"></div> 
+   <div class="hero-content"> 
+    <h1>Find Your Perfect Home</h1> 
+    <p>Discover a curated selection of exceptional residential and commercial properties.</p> <a href="property-listings.html" class="explore-button">Explore Our Listings</a> 
+   </div> 
+  </div> 
+  <section id="vision" class="content-section"> 
+   <h2>Our Vision</h2> 
+   <p style="font-size: 24px; font-weight: bold; color: #eee;"> A Home for<br> Every<br> Kenyan </p> 
+  </section> 
+  <section id="mission" class="content-section"> 
+   <h2>Our Mission</h2> 
+   <p style="font-size: 20px; line-height: 1.7; color: #ddd;"> Developing Decent, Affordable Residential Homes<br> and Commercial Establishments for Sustainable<br> Economic Growth. </p> 
+  </section> 
+  <section id="about" class="content-section"> 
+   <h2>About Us</h2> 
+   <p> Milena Homes is a leading Residential and Commercial Development Company in Kenya.<br> With a strong commitment to quality and customer satisfaction, we also offer comprehensive<br> Property Management and Sales services to meet all your real estate needs. </p> 
+  </section> 
+  <section id="testimonials" class="content-section"> 
+   <h2>What Our Clients Say</h2> 
+   <div class="testimonials-container"> 
+    <div class="testimonial"> 
+     <p>"Milena Homes helped me find the perfect home for my family. Their team was professional and attentive every step of the way. I highly recommend their services!"</p> 
+     <h4>- Joseph Mwangi</h4> 
+    </div> 
+    <div class="testimonial"> 
+     <p>"Excellent service and quality construction. I am extremely satisfied with my new commercial property. Milena Homes delivers on their promises."</p> 
+     <h4>- Aisha Njeri</h4> 
+    </div> 
+    <div class="testimonial"> 
+     <p>"Their property management division is top‑notch. They handle everything seamlessly, giving me peace of mind as an investor. A reliable and trustworthy partner."</p> 
+     <h4>- Samuel Otieno</h4> 
+    </div> 
+   </div> 
+  </section> 
+  <footer> 
+   <p>© 2025 Milena Homes. All rights reserved.</p> 
+   <p>Contact Us: <a href="mailto:chairman.milenahomes@gmail.com">chairman.milenahomes@gmail.com</a> | +254 XXX XXX XXX</p> 
+  </footer> 
  </body>
 </html>
+
+
+
+
+
+
+
+
 
 
 
