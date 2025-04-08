@@ -42,24 +42,6 @@
       .details-container p {
         margin-bottom: 15px;
       }
-      .details-container ul {
-        list-style: none;
-        padding: 0;
-      }
-      .details-container li {
-        margin-bottom: 5px;
-      }
-      .amenities {
-        margin-top: 20px;
-      }
-      .amenities h2 {
-        color: gold;
-        margin-bottom: 10px;
-      }
-      .amenities ul {
-        list-style-type: disc;
-        padding-left: 20px;
-      }
       .contact {
         margin-top: 30px;
         text-align: center;
@@ -71,6 +53,7 @@
         padding: 10px 20px;
         border-radius: 5px;
         cursor: pointer;
+        font-weight: bold;
       }
       @media screen and (max-width: 768px) {
         .property-details {
@@ -90,29 +73,15 @@
           <img id="propertyImage" src="property-image.jpg" alt="Property Image"> 
         </div> 
         <div class="details-container"> 
-          <h1 id="propertyTitle">Luxury Villa in the Heart of the City</h1> 
-          <p id="propertyDescription">This stunning villa offers a luxurious lifestyle with spacious interiors, a private garden, and a swimming pool.</p> 
-          <ul id="propertySpecs"> 
-            <li><strong>Bedrooms:</strong> <span id="propertyBedrooms">4</span></li> 
-            <li><strong>Bathrooms:</strong> <span id="propertyBathrooms">5</span></li> 
-            <li><strong>Size:</strong> <span id="propertySize">5000 sq ft</span></li> 
-            <li><strong>Price:</strong> <span id="propertyPrice">Ksh 5,000,000</span></li> 
-          </ul> 
+          <h1 id="propertyName">Luxury Villa in the Heart of the City</h1> 
+          <p id="propertyDescription">This stunning villa offers a luxurious lifestyle with spacious interiors, a private garden, and a swimming pool.</p>
+          <p><strong>Location:</strong> <span id="propertyLocation">Nairobi</span></p>
+          <p><strong>Type:</strong> <span id="propertyType">Villa</span></p>
+          <p><strong>Price:</strong> <span id="propertyPrice">Ksh 5,000,000</span></p>
         </div> 
       </div> 
-      <div class="amenities"> 
-        <h2>Amenities</h2> 
-        <ul id="propertyAmenities"> 
-          <li>Private Swimming Pool</li> 
-          <li>Home Theater</li> 
-          <li>Gourmet Kitchen</li> 
-          <li>Home Office</li> 
-          <li>Fitness Center</li> 
-          <li>24/7 Security</li> 
-        </ul> 
-      </div> 
       <div class="contact"> 
-        <button>Contact Agent</button> 
+        <button id="whatsappButton">Contact us +254 726 093682</button>
       </div> 
     </div> 
     <script>
@@ -153,42 +122,35 @@
           const imageUrl = (images && images.length) ? images[0] : 'property-image.jpg';
           document.getElementById('propertyImage').src = imageUrl;
 
-          // Update textual details
-          document.getElementById('propertyTitle').textContent = property.title || 'Untitled Property';
+          // Update textual details using the new fields: name, description, location, type and price.
+          document.getElementById('propertyName').textContent = property.name || 'Untitled Property';
           document.getElementById('propertyDescription').textContent = property.description || '';
-          document.getElementById('propertyBedrooms').textContent = property.bedrooms || 'N/A';
-          document.getElementById('propertyBathrooms').textContent = property.bathrooms || 'N/A';
-          document.getElementById('propertySize').textContent = property.size || 'N/A';
+          document.getElementById('propertyLocation').textContent = property.location || 'N/A';
+          document.getElementById('propertyType').textContent = property.type || 'N/A';
           document.getElementById('propertyPrice').textContent = property.price ? `Ksh ${property.price}` : 'N/A';
 
-          // Update amenities if available (assumes property.amenities is a comma-separated string or an array)
-          if (property.amenities) {
-            const amenitiesEl = document.getElementById('propertyAmenities');
-            amenitiesEl.innerHTML = '';
-            const amenitiesArray = Array.isArray(property.amenities)
-              ? property.amenities
-              : property.amenities.split(',');
-            amenitiesArray.forEach(amenity => {
-              const li = document.createElement('li');
-              li.textContent = amenity.trim();
-              amenitiesEl.appendChild(li);
-            });
-          }
         } catch (error) {
           console.error('Error loading property details:', error);
         }
       }
 
-      document.addEventListener('DOMContentLoaded', loadPropertyDetails);
+      // Set up the WhatsApp contact button
+      function setupWhatsAppButton() {
+        const whatsappButton = document.getElementById('whatsappButton');
+        whatsappButton.addEventListener('click', function() {
+          // Open WhatsApp with the provided number
+          window.open("https://wa.me/254726093682", "_blank");
+        });
+      }
+
+      document.addEventListener('DOMContentLoaded', function() {
+        loadPropertyDetails();
+        setupWhatsAppButton();
+      });
     </script>
   </body>
 </html>
 
 
 
-
-
-
-
-
-
+  
