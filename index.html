@@ -280,6 +280,17 @@
       text-align: right;
     }
 
+    /* Animation added to reviews on hover */
+    .testimonial:hover {
+      animation: pulseReview 0.8s ease forwards;
+    }
+    
+    @keyframes pulseReview {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+      100% { transform: scale(1); }
+    }
+
     /* Footer */
     footer {
       background-color: rgba(0, 0, 0, 0.8);
@@ -304,14 +315,19 @@
    <div class="logo-container"> 
     <img class="logo" src="https://i.postimg.cc/KzbqvqXH/Milena-Homes-Logo.png" alt="Milena Homes Logo"> 
    </div> 
-   <nav> <a href="property-listings.html">Properties</a> <a href="mailto:chairman.milenahomes@gmail.com">Contact Us</a> <a href="submit.html">Submit Property</a> 
+   <nav> 
+    <a href="property-listings.html">Properties</a> 
+    <a href="mailto:chairman.milenahomes@gmail.com">Contact Us</a> 
+    <a href="#about">About Us</a>
+    <a href="submit.html">Submit Property</a> 
    </nav> 
   </header> 
   <div class="hero"> 
    <div class="hero-overlay"></div> 
    <div class="hero-content"> 
     <h1>Find Your Perfect Home</h1> 
-    <p>Discover a curated selection of exceptional residential and commercial properties.</p> <a href="property-listings.html" class="explore-button">Explore Our Listings</a> 
+    <p>Discover a curated selection of exceptional residential and commercial properties.</p> 
+    <a href="property-listings.html" class="explore-button">Explore Our Listings</a> 
    </div> 
   </div> 
   <section id="vision" class="content-section"> 
@@ -345,25 +361,7 @@
   </section> 
   <footer> 
    <p>© 2025 Milena Homes. All rights reserved.</p> 
-   <p>Contact Us: <a href="mailto:chairman.milenahomes@gmail.com">chairman.milenahomes@gmail.com</a> | +254 XXX XXX XXX</p> 
+   <p>Contact Us: <a href="mailto:chairman.milenahomes@gmail.com">chairman.milenahomes@gmail.com</a> | +254 726 093682</p> 
   </footer> 
  </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
